@@ -19,7 +19,12 @@ public class Game {
     private String platforms;
     private double score;
     private String imgUrl;
+
+    @Column(columnDefinition = "TEXT")
     private String shortDescription;
+
+    //para o jpa identificar que é do tipo texto
+    @Column(columnDefinition = "TEXT")
     private String longDescription;
 
     public Game() {
