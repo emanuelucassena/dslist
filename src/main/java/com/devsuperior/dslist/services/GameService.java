@@ -4,6 +4,7 @@ package com.devsuperior.dslist.services;
 import com.devsuperior.dslist.dto.GameDTO;
 import com.devsuperior.dslist.dto.GameMinDTO;
 import com.devsuperior.dslist.entities.Game;
+import com.devsuperior.dslist.projections.GameMinProjection;
 import com.devsuperior.dslist.repositories.GameRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -37,4 +38,12 @@ public class GameService {
         // Converte o Game para GameDTO (com dados completos, ex: descrição, gênero, ano, etc.)
         return new GameDTO(result);
     }
+
+
+    @Transactional(readOnly = true) // Indica que a transação será apenas de leitura (otimiza desempenho)
+    public List<GameMinDTO> findBylist(Long listId) {
+        List<GameMinProjection> result = gameRepository.searchByList(listId);
+        return result.stream().map(GameMinDTO::new).toList();
+    }
+
 }
