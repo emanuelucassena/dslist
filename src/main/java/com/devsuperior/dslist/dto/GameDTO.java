@@ -1,14 +1,11 @@
 package com.devsuperior.dslist.dto;
 
 import com.devsuperior.dslist.entities.Game;
-import jakarta.persistence.Column;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
 import org.springframework.beans.BeanUtils;
 
 public class GameDTO {
 
+    // Atributos que representam os dados que queremos expor no frontend
     private Long id;
     private String title;
     private Integer year;
@@ -19,12 +16,17 @@ public class GameDTO {
     private String shortDescription;
     private String longDescription;
 
+    // Construtor vazio (obrigatório para frameworks como o Spring e ferramentas de serialização JSON)
     public GameDTO() {
     }
 
+    // Construtor que recebe um objeto Game (entidade) e copia seus dados para o DTO
     public GameDTO(Game entity){
-        BeanUtils.copyProperties(entity,this);
+        // Copia os atributos com os mesmos nomes e tipos do objeto "entity" para "this" (o DTO)
+        BeanUtils.copyProperties(entity, this);
     }
+
+    // Métodos getters e setters para permitir acessar e modificar os dados (seguindo o padrão JavaBeans)
 
     public Long getId() {
         return id;
