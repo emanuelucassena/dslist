@@ -76,8 +76,14 @@ A seguir estão os principais pacotes e classes explicadas para facilitar o ente
 
 ---
 
-Autor:
-Emanuel Lucas Telles Bastos Sena
-Estudante de Engenharia de Computação na UEFS
+## 🤝 Créditos
+
+Este projeto foi baseado no curso **Semana Spring React** da [DevSuperior](https://devsuperior.com.br), que forneceu a estrutura, orientação e conteúdo para o desenvolvimento desta aplicação.
+
+
+## 👤 Autor
+
+**Emanuel Lucas Telles Bastos Sena**  
+Estudante de Engenharia de Computação na UEFS  
 Técnico em Desenvolvimento de Sistemas - SENAI
 
