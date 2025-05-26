@@ -40,10 +40,19 @@ public class GameService {
     }
 
 
-    @Transactional(readOnly = true) // Indica que a transação será apenas de leitura (otimiza desempenho)
+    @Transactional(readOnly = true)
+    // Indica que essa transação é apenas de leitura. Isso melhora o desempenho,
+    // pois o banco de dados sabe que nenhuma informação será alterada.
+
     public List<GameMinDTO> findBylist(Long listId) {
+        // Chama o método do repositório para buscar os jogos pertencentes a uma lista específica.
+        // O resultado é uma lista de projeções com dados específicos dos jogos.
         List<GameMinProjection> result = gameRepository.searchByList(listId);
+
+        // Converte a lista de projeções (GameMinProjection) em uma lista de DTOs (GameMinDTO),
+        // usando stream para percorrer os dados e aplicar o construtor do DTO.
         return result.stream().map(GameMinDTO::new).toList();
     }
+
 
 }

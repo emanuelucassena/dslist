@@ -1,10 +1,14 @@
 package com.devsuperior.dslist.controllers;
 
+// Importa os DTOs usados como resposta da API
 import com.devsuperior.dslist.dto.GameListDTO;
 import com.devsuperior.dslist.dto.GameMinDTO;
-import com.devsuperior.dslist.services.GameListService;
 
+// Importa os serviços responsáveis pela lógica de negócio
+import com.devsuperior.dslist.services.GameListService;
 import com.devsuperior.dslist.services.GameService;
+
+// Importações do Spring
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -13,29 +17,31 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
-@RestController // Define que esta classe é um controlador REST (retorna dados em formato JSON, por exemplo)
-@RequestMapping(value = "/lists") // Define o caminho base dos endpoints desta classe (/lists)
+@RestController // Define que esta classe é um controlador REST (responde requisições HTTP e retorna dados, geralmente em JSON)
+@RequestMapping(value = "/lists") // Define a rota base para todos os endpoints da classe (ex: /lists)
 public class GameListController {
 
-    @Autowired // Injeta automaticamente o GameListService para uso aqui dentro
+    @Autowired // Injeta automaticamente a instância de GameListService
     private GameListService gameListService;
-    @Autowired
+
+    @Autowired // Injeta automaticamente a instância de GameService
     private GameService gameService;
 
-    // Endpoint que responde a requisições GET feitas para /lists
+    // Endpoint que retorna todas as listas de jogos
+    // Exemplo: GET http://localhost:8080/lists
     @GetMapping
     public List<GameListDTO> findAll() {
-        // Chama o método do serviço para buscar todas as listas de jogos
+        // Busca todas as listas de jogos usando o serviço
         List<GameListDTO> result = gameListService.findAll();
-
-        // Retorna o resultado para o cliente (normalmente um array de objetos JSON)
-        return result;
+        return result; // Retorna a lista como resposta
     }
 
-    @GetMapping(value = "/{listId}/games")
+    // Endpoint que retorna os jogos pertencentes a uma lista específica
+    // Exemplo: GET http://localhost:8080/lists/1/games
+    @GetMapping(value = "/{listId}/games") // {listId} é uma variável de caminho
     public List<GameMinDTO> findByList(@PathVariable Long listId) {
+        // Busca os jogos da lista com o ID fornecido
         List<GameMinDTO> result = gameService.findBylist(listId);
-        return result;
+        return result; // Retorna os jogos como resposta
     }
 }
-
